@@ -33,6 +33,8 @@ public abstract class Actor {
         public Stats(final Type type) {
             this.type = type;
         }
+
+        private Stats() {}
     }
 
     @Data
@@ -51,6 +53,8 @@ public abstract class Actor {
         public Defense(final Type type) {
             this.type = type;
         }
+
+        private Defense() {}
     }
 
     @Data
@@ -62,6 +66,8 @@ public abstract class Actor {
         public Characteristic(final Type type) {
             this.type = type;
         }
+
+        private Characteristic() {}
 
         enum Type {
             @JsonProperty("Brawn")

@@ -2,12 +2,10 @@ package com.github.genravengenesys.genesysserver.service;
 
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Collection;
-import com.couchbase.client.java.json.JsonArray;
 import com.github.genravengenesys.genesysserver.model.Talent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,26 +20,18 @@ public class TalentService extends AbstractService {
     }
 
     public Talent createTalent(final String name) {
-        upsertRecord(collection, name, new Talent(name));
-        updateMasterList(TALENT, name);
-        return getTalent(name);
+        return createRecord(collection, name, TALENT, new Talent(name), Talent.class);
     }
 
     public Talent getTalent(final String name) {
-        return getRecord(collection, name).contentAs(Talent.class);
+        return getRecord(collection, name, Talent.class);
     }
 
     public List<Talent> getTalents() {
-        final List<Talent> talents = new ArrayList<>();
-        final JsonArray array = getMasterList(TALENT);
-        for (int i = 0; i < array.size(); i++) {
-            talents.add(getTalent(array.getString(i)));
-        }
-        return talents;
+        return getRecords(collection, TALENT, Talent.class);
     }
 
     public Talent updateTalent(final String name, final Talent talent) {
-        upsertRecord(collection, name, talent);
-        return getTalent(name);
+        return updateRecord(collection, name, talent, Talent.class);
     }
 }
