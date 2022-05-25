@@ -16,6 +16,7 @@ public abstract class AbstractService {
     protected final String TALENT = "talents";
     protected final String ACTOR = "actors";
     protected final String PLAYER = "players";
+    protected final String NEMESIS = "nemesis";
 
     @Autowired
     public AbstractService(final Bucket bucket) {
