@@ -15,6 +15,8 @@ public class Talent {
         this.name = name;
     }
 
+    protected Talent() {}
+
     enum Ranked {
         @JsonProperty("Yes")
         YES,
