@@ -20,7 +20,7 @@ public class SkillService extends AbstractService {
     }
 
     public Skill createSkill(final String name) {
-        return createRecord(collection, name, TALENT, new Skill(name), Skill.class);
+        return createRecord(collection, name, SKILL, new Skill(name), Skill.class);
     }
 
     public Skill getSkill(final String name) {
@@ -28,7 +28,7 @@ public class SkillService extends AbstractService {
     }
 
     public List<Skill> getSkills() {
-        return getRecords(collection, TALENT, Skill.class);
+        return getRecords(collection, SKILL, Skill.class);
     }
 
     public Skill updateSkill(final String name, final Skill skill) {

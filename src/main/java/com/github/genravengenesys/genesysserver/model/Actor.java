@@ -59,21 +59,6 @@ public abstract class Actor {
         private int temp = 1;
 
         public Characteristic() {}
-
-        enum Type {
-            @JsonProperty("Brawn")
-            BRAWN,
-            @JsonProperty("Agility")
-            AGILITY,
-            @JsonProperty("Intellect")
-            INTELLECT,
-            @JsonProperty("Cunning")
-            CUNNING,
-            @JsonProperty("Willpower")
-            WILLPOWER,
-            @JsonProperty("Presence")
-            PRESENCE
-        }
     }
 
     @Data

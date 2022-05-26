@@ -9,13 +9,13 @@ public class Skill {
     private String name;
     private boolean active = false;
     private Type type;
-    private Actor.Characteristic characteristic;
+    private Characteristic characteristic;
 
     public Skill(final String name) {
         this.name = name;
     }
 
-    private Skill() {}
+    protected Skill() {}
 
     enum Type {
         @JsonProperty("General")
@@ -28,5 +28,20 @@ public class Skill {
         COMBAT,
         @JsonProperty("Knowledge")
         KNOWLEDGE
+    }
+
+    enum Characteristic {
+        @JsonProperty("Brawn")
+        BRAWN,
+        @JsonProperty("Agility")
+        AGILITY,
+        @JsonProperty("Intellect")
+        INTELLECT,
+        @JsonProperty("Cunning")
+        CUNNING,
+        @JsonProperty("Willpower")
+        WILLPOWER,
+        @JsonProperty("Presence")
+        PRESENCE
     }
 }
