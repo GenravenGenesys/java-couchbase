@@ -2,24 +2,29 @@ package com.github.genravengenesys.genesysserver.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public abstract class Actor {
     private String name;
-    private Characteristic brawn = new Characteristic(Characteristic.Type.BRAWN);
-    private Characteristic agility = new Characteristic(Characteristic.Type.AGILITY);
-    private Characteristic intellect = new Characteristic(Characteristic.Type.INTELLECT);
-    private Characteristic cunning = new Characteristic(Characteristic.Type.CUNNING);
-    private Characteristic willpower = new Characteristic(Characteristic.Type.WILLPOWER);
-    private Characteristic presence = new Characteristic(Characteristic.Type.PRESENCE);
+    private Characteristic brawn = new Characteristic();
+    private Characteristic agility = new Characteristic();
+    private Characteristic intellect = new Characteristic();
+    private Characteristic cunning = new Characteristic();
+    private Characteristic willpower = new Characteristic();
+    private Characteristic presence = new Characteristic();
     private int soak;
-    private Stats wounds = new Stats(Stats.Type.WOUNDS);
-    private Defense melee = new Defense(Defense.Type.MELEE);
-    private Defense ranged = new Defense(Defense.Type.RANGED);
+    private Stats wounds = new Stats();
+    private Defense melee = new Defense();
+    private Defense ranged = new Defense();
+    private List<ActorTalent> talents = new ArrayList<>();
+    private List<ActorSkill> skills = new ArrayList<>();
 
     @Data
     public static class Stats {
-        private Type type;
         private int current = 0;
         private int max = 1;
 
@@ -30,16 +35,11 @@ public abstract class Actor {
             STRAIN
         }
 
-        public Stats(final Type type) {
-            this.type = type;
-        }
-
-        private Stats() {}
+        public Stats() {}
     }
 
     @Data
     public static class Defense {
-        private Type type;
         private int current = 0;
         private int temp = 0;
 
@@ -50,24 +50,15 @@ public abstract class Actor {
             RANGED
         }
 
-        public Defense(final Type type) {
-            this.type = type;
-        }
-
-        private Defense() {}
+        public Defense() {}
     }
 
     @Data
     public static class Characteristic {
-        private Type type;
         private int current = 1;
         private int temp = 1;
 
-        public Characteristic(final Type type) {
-            this.type = type;
-        }
-
-        private Characteristic() {}
+        public Characteristic() {}
 
         enum Type {
             @JsonProperty("Brawn")
@@ -83,5 +74,18 @@ public abstract class Actor {
             @JsonProperty("Presence")
             PRESENCE
         }
+    }
+
+    @Data
+    @EqualsAndHashCode(callSuper = false)
+    public static class ActorTalent extends Talent {
+        private int ranks;
+    }
+
+    @Data
+    @EqualsAndHashCode(callSuper = false)
+    public static class ActorSkill extends Skill {
+        private int ranks;
+        private boolean career;
     }
 }

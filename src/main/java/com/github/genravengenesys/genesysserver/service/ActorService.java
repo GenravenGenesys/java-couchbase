@@ -50,7 +50,7 @@ public class ActorService extends AbstractService {
         return getRecords(nemesisCollection, NEMESIS, Nemesis.class);
     }
 
-    public Nemesis updateNemesis(final String name, final Nemesis player) {
-        return updateRecord(nemesisCollection, name, player, Nemesis.class);
+    public Nemesis updateNemesis(final String name, final Nemesis nemesis) {
+        return updateRecord(nemesisCollection, name, nemesis, Nemesis.class);
     }
 }

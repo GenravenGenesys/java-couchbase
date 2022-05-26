@@ -35,12 +35,12 @@ public class ActorController {
     }
 
     @PutMapping("/actors/players/{name}")
-    public ResponseEntity<Player> updatePlayer(@PathVariable final String name, @RequestBody final Player talent) {
-        return ResponseEntity.ok(actorService.updatePlayer(name, talent));
+    public ResponseEntity<Player> updatePlayer(@PathVariable final String name, @RequestBody final Player player) {
+        return ResponseEntity.ok(actorService.updatePlayer(name, player));
     }
 
     @GetMapping("/actors/nemesis")
-    public ResponseEntity<List<Nemesis>> getNemesis() {
+    public ResponseEntity<List<Nemesis>> getNemeses() {
         return ResponseEntity.ok(actorService.getNemeses());
     }
 
@@ -55,7 +55,7 @@ public class ActorController {
     }
 
     @PutMapping("/actors/nemesis/{name}")
-    public ResponseEntity<Nemesis> updateNemesis(@PathVariable final String name, @RequestBody final Nemesis talent) {
-        return ResponseEntity.ok(actorService.updateNemesis(name, talent));
+    public ResponseEntity<Nemesis> updateNemesis(@PathVariable final String name, @RequestBody final Nemesis nemesis) {
+        return ResponseEntity.ok(actorService.updateNemesis(name, nemesis));
     }
 }
