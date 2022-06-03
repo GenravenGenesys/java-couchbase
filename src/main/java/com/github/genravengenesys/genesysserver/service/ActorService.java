@@ -39,6 +39,7 @@ public class ActorService extends AbstractService {
     }
 
     public Nemesis createNemesis(final String name) {
+        System.out.println(new Nemesis(name));
         return createRecord(nemesisCollection, name, NEMESIS, new Nemesis(name), Nemesis.class);
     }
 

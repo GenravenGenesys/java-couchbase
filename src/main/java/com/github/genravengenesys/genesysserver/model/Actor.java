@@ -1,8 +1,10 @@
 package com.github.genravengenesys.genesysserver.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,8 @@ public abstract class Actor {
     private List<ActorSkill> skills = new ArrayList<>();
 
     @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Stats {
         private int current = 0;
         private int max = 1;
@@ -34,11 +38,11 @@ public abstract class Actor {
             @JsonProperty("Strain")
             STRAIN
         }
-
-        public Stats() {}
     }
 
     @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Defense {
         private int current = 0;
         private int temp = 0;
@@ -49,16 +53,6 @@ public abstract class Actor {
             @JsonProperty("Ranged")
             RANGED
         }
-
-        public Defense() {}
-    }
-
-    @Data
-    public static class Characteristic {
-        private int current = 1;
-        private int temp = 1;
-
-        public Characteristic() {}
     }
 
     @Data
