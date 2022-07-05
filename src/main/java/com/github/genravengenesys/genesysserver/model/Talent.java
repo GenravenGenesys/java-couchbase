@@ -9,6 +9,7 @@ public class Talent {
     private Ranked ranked;
     private Activation activation;
     private Tier tier;
+    private String summary;
     private String description;
 
     public Talent(final String name) {
