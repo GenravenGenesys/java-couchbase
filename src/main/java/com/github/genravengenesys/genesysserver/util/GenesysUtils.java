@@ -7,5 +7,5 @@ public class GenesysUtils {
 
     private GenesysUtils(){}
 
-    public static final int MAX_SKILL_RANKS = 5;
+    public static final int MAX_RANKS = 5;
 }

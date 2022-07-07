@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.github.genravengenesys.genesysserver.util.GenesysUtils.MAX_SKILL_RANKS;
+import static com.github.genravengenesys.genesysserver.util.GenesysUtils.MAX_RANKS;
 
 @Service
 public class ActorService extends AbstractService {
@@ -67,9 +67,20 @@ public class ActorService extends AbstractService {
     public Nemesis updateNemesisTalent(final String name, final Actor.ActorTalent talent) {
         final Nemesis nemesis = getNemesis(name);
         final List<Actor.ActorTalent> talents = nemesis.getTalents();
-        talents.stream().filter(actorTalent -> actorTalent.getName().equals(talent.getName()))
-                .filter(actorTalent -> Talent.Ranked.YES.equals(actorTalent.getRanked()) && actorTalent.getRanks() < MAX_SKILL_RANKS)
-                .forEach(actorTalent -> actorTalent.setRanks(actorTalent.getRanks() + 1));
+        if (talents.isEmpty()) {
+            talents.add(talent);
+        }
+        else {
+            talents.forEach(actorTalent -> {
+                if (actorTalent.getName().equals(talent.getName())) {
+                    if (Talent.Ranked.YES.equals(actorTalent.getRanked()) && actorTalent.getRanks() < MAX_RANKS) {
+                        actorTalent.setRanks(actorTalent.getRanks() + 1);
+                    }
+                } else {
+                    talents.add(talent);
+                }
+            });
+        }
         nemesis.setTalents(talents);
         return updateNemesis(name, nemesis);
     }
