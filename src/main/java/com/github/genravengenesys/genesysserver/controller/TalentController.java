@@ -19,8 +19,13 @@ public class TalentController {
     }
 
     @GetMapping("/talents")
-    public ResponseEntity<List<Talent>> getTalent() {
+    public ResponseEntity<List<Talent>> getTalents() {
         return ResponseEntity.ok(talentService.getTalents());
+    }
+
+    @GetMapping("/talents/names")
+    public ResponseEntity<List<String>> getTalent() {
+        return ResponseEntity.ok(talentService.getTalentNames());
     }
 
     @GetMapping("/talents/{name}")
