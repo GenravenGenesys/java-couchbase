@@ -11,27 +11,27 @@ import java.util.List;
 @Service
 public class SkillService extends AbstractService {
 
-    protected final Collection collection;
+    protected final Collection skillCollection;
 
     @Autowired
     public SkillService(final Bucket bucket) {
         super(bucket);
-        this.collection = bucket.scope(SKILL).collection(SKILL);
+        this.skillCollection = bucket.scope(SKILL).collection(SKILL);
     }
 
     public Skill createSkill(final String name) {
-        return createRecord(collection, name, SKILL, new Skill(name), Skill.class);
+        return createRecord(skillCollection, name, SKILL, new Skill(name), Skill.class);
     }
 
     public Skill getSkill(final String name) {
-        return getRecord(collection, name, Skill.class);
+        return getRecord(skillCollection, name, Skill.class);
     }
 
     public List<Skill> getSkills() {
-        return getRecords(collection, SKILL, Skill.class);
+        return getRecords(skillCollection, SKILL, Skill.class);
     }
 
     public Skill updateSkill(final String name, final Skill skill) {
-        return updateRecord(collection, name, skill, Skill.class);
+        return updateRecord(skillCollection, name, skill, Skill.class);
     }
 }

@@ -5,6 +5,7 @@ import com.couchbase.client.java.Collection;
 import com.github.genravengenesys.genesysserver.model.Actor;
 import com.github.genravengenesys.genesysserver.model.Nemesis;
 import com.github.genravengenesys.genesysserver.model.Player;
+import com.github.genravengenesys.genesysserver.model.Rival;
 import com.github.genravengenesys.genesysserver.model.Talent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,15 +16,10 @@ import static com.github.genravengenesys.genesysserver.util.GenesysUtils.MAX_RAN
 
 @Service
 public class ActorService extends AbstractService {
-
-    protected final Collection playerCollection;
-    protected final Collection nemesisCollection;
     
     @Autowired
     public ActorService(final Bucket bucket) {
         super(bucket);
-        this.playerCollection = bucket.scope(ACTOR).collection(PLAYER);
-        this.nemesisCollection = bucket.scope(ACTOR).collection(NEMESIS);
     }
 
     public Player createPlayer(final String name) {
@@ -57,7 +53,7 @@ public class ActorService extends AbstractService {
     public Nemesis updateNemesis(final String name, final Nemesis nemesis) {
         return updateRecord(nemesisCollection, name, nemesis, Nemesis.class);
     }
-
+    
     public Nemesis updateNemesisSkill(final String name, final Actor.ActorSkill skill) {
         final Nemesis nemesis = getNemesis(name);
         nemesis.getSkills().replaceAll(actorSkill -> actorSkill.getName().equals(skill.getName()) ? skill : actorSkill);
@@ -84,4 +80,19 @@ public class ActorService extends AbstractService {
         nemesis.setTalents(talents);
         return updateNemesis(name, nemesis);
     }
+
+    public Rival createRival(final String name) {
+        return createRecord(rivalCollection, name, RIVAL, new Rival(name), Rival.class);
+    }
+
+    public Rival getRival(final String name) {
+        return getRecord(rivalCollection, name, Rival.class);
+    }
+
+    public List<Rival> getRivals() {
+        return getRecords(rivalCollection, RIVAL, Rival.class);
+    }
+
+    public Rival updateRival(final String name, final Rival rival) {
+        return updateRecord(rivalCollection, name, rival, Rival.class);
 }
