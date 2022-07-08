@@ -4,6 +4,7 @@ import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Collection;
 import com.github.genravengenesys.genesysserver.model.Nemesis;
 import com.github.genravengenesys.genesysserver.model.Player;
+import com.github.genravengenesys.genesysserver.model.Rival;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +12,10 @@ import java.util.List;
 
 @Service
 public class ActorService extends AbstractService {
-
-    protected final Collection playerCollection;
-    protected final Collection nemesisCollection;
     
     @Autowired
     public ActorService(final Bucket bucket) {
         super(bucket);
-        this.playerCollection = bucket.scope(ACTOR).collection(PLAYER);
-        this.nemesisCollection = bucket.scope(ACTOR).collection(NEMESIS);
     }
 
     public Player createPlayer(final String name) {
@@ -39,7 +35,6 @@ public class ActorService extends AbstractService {
     }
 
     public Nemesis createNemesis(final String name) {
-        System.out.println(new Nemesis(name));
         return createRecord(nemesisCollection, name, NEMESIS, new Nemesis(name), Nemesis.class);
     }
 
@@ -53,5 +48,21 @@ public class ActorService extends AbstractService {
 
     public Nemesis updateNemesis(final String name, final Nemesis nemesis) {
         return updateRecord(nemesisCollection, name, nemesis, Nemesis.class);
+    }
+
+    public Rival createRival(final String name) {
+        return createRecord(rivalCollection, name, RIVAL, new Rival(name), Rival.class);
+    }
+
+    public Rival getRival(final String name) {
+        return getRecord(rivalCollection, name, Rival.class);
+    }
+
+    public List<Rival> getRivals() {
+        return getRecords(rivalCollection, RIVAL, Rival.class);
+    }
+
+    public Rival updateRival(final String name, final Rival rival) {
+        return updateRecord(rivalCollection, name, rival, Rival.class);
     }
 }
