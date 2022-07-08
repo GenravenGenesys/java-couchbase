@@ -1,5 +1,6 @@
 package com.github.genravengenesys.genesysserver.controller;
 
+import com.github.genravengenesys.genesysserver.model.Actor;
 import com.github.genravengenesys.genesysserver.model.Nemesis;
 import com.github.genravengenesys.genesysserver.model.Player;
 import com.github.genravengenesys.genesysserver.model.Rival;
@@ -59,6 +60,15 @@ public class ActorController {
     public ResponseEntity<Nemesis> updateNemesis(@PathVariable final String name, @RequestBody final Nemesis nemesis) {
         return ResponseEntity.ok(actorService.updateNemesis(name, nemesis));
     }
+    
+    @PutMapping("/actors/nemesis/{name}/skill")
+    public ResponseEntity<Nemesis> updateNemesisSkill(@PathVariable final String name, @RequestBody final Actor.ActorSkill skill) {
+        return ResponseEntity.ok(actorService.updateNemesisSkill(name, skill));
+    }
+
+    @PutMapping("/actors/nemesis/{name}/talent")
+    public ResponseEntity<Nemesis> updateNemesisTalent(@PathVariable final String name, @RequestBody final Actor.ActorTalent talent) {
+        return ResponseEntity.ok(actorService.updateNemesisTalent(name, talent));
 
     @GetMapping("/actors/rival")
     public ResponseEntity<List<Rival>> getRivals() {
