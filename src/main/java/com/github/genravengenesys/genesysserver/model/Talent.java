@@ -9,6 +9,7 @@ public class Talent {
     private Ranked ranked;
     private Activation activation;
     private Tier tier;
+    private String summary;
     private String description;
 
     public Talent(final String name) {
@@ -17,14 +18,14 @@ public class Talent {
 
     protected Talent() {}
 
-    enum Ranked {
+    public enum Ranked {
         @JsonProperty("Yes")
         YES,
         @JsonProperty("No")
         NO
     }
 
-    enum Activation {
+    public enum Activation {
         @JsonProperty("Passive")
         PASSIVE,
         @JsonProperty("Active (Action)")
@@ -37,7 +38,7 @@ public class Talent {
         ACTIVEINCIDENTALOUTOFTURN
     }
 
-    enum Tier {
+    public enum Tier {
         @JsonProperty("First")
         FIRST,
         @JsonProperty("Second")

@@ -65,6 +65,11 @@ public abstract class Actor {
     @EqualsAndHashCode(callSuper = false)
     public static class ActorSkill extends Skill {
         private int ranks;
+    }
+
+    @Data
+    @EqualsAndHashCode(callSuper = false)
+    public static class PlayerSkill extends ActorSkill {
         private boolean career;
     }
 }
