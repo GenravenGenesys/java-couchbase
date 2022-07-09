@@ -69,6 +69,7 @@ public class ActorController {
     @PutMapping("/actors/nemesis/{name}/talent")
     public ResponseEntity<Nemesis> updateNemesisTalent(@PathVariable final String name, @RequestBody final Actor.ActorTalent talent) {
         return ResponseEntity.ok(actorService.updateNemesisTalent(name, talent));
+    }
 
     @GetMapping("/actors/rival")
     public ResponseEntity<List<Rival>> getRivals() {

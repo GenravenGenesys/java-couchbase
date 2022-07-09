@@ -7,7 +7,7 @@ import lombok.Data;
 public class Skill {
 
     private String name;
-    private boolean active = false;
+    private boolean active = true;
     private Type type;
     private Characteristic characteristic;
 

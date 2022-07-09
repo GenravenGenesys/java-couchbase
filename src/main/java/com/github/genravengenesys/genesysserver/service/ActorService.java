@@ -1,16 +1,12 @@
 package com.github.genravengenesys.genesysserver.service;
 
 import com.couchbase.client.java.Bucket;
-import com.couchbase.client.java.Collection;
-import com.github.genravengenesys.genesysserver.model.Actor;
-import com.github.genravengenesys.genesysserver.model.Nemesis;
-import com.github.genravengenesys.genesysserver.model.Player;
-import com.github.genravengenesys.genesysserver.model.Rival;
-import com.github.genravengenesys.genesysserver.model.Talent;
+import com.github.genravengenesys.genesysserver.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.github.genravengenesys.genesysserver.util.GenesysUtils.MAX_RANKS;
 
@@ -39,7 +35,9 @@ public class ActorService extends AbstractService {
     }
 
     public Nemesis createNemesis(final String name) {
-        return createRecord(nemesisCollection, name, NEMESIS, new Nemesis(name), Nemesis.class);
+        final Nemesis nemesis = new Nemesis(name);
+        nemesis.setSkills(getActiveSkills());
+        return createRecord(nemesisCollection, name, NEMESIS, nemesis, Nemesis.class);
     }
 
     public Nemesis getNemesis(final String name) {
@@ -95,4 +93,11 @@ public class ActorService extends AbstractService {
 
     public Rival updateRival(final String name, final Rival rival) {
         return updateRecord(rivalCollection, name, rival, Rival.class);
+    }
+
+    private List<Actor.ActorSkill> getActiveSkills() {
+        return getRecords(skillCollection, SKILL, Actor.ActorSkill.class).stream()
+                .filter(Skill::isActive)
+                .collect(Collectors.toList());
+    }
 }
