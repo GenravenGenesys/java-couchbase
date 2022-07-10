@@ -1,6 +1,5 @@
 package com.github.genravengenesys.genesysserver.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,13 +30,6 @@ public abstract class Actor {
     public static class Stats {
         private int current = 0;
         private int max = 1;
-
-        enum Type {
-            @JsonProperty("Wounds")
-            WOUNDS,
-            @JsonProperty("Strain")
-            STRAIN
-        }
     }
 
     @Data
@@ -46,13 +38,6 @@ public abstract class Actor {
     public static class Defense {
         private int current = 0;
         private int temp = 0;
-
-        enum Type {
-            @JsonProperty("Melee")
-            MELEE,
-            @JsonProperty("Ranged")
-            RANGED
-        }
     }
 
     @Data

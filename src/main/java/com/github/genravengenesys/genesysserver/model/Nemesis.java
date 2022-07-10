@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Nemesis extends Actor {
+public class Nemesis extends NonPlayerCharacter {
 
     public Nemesis(final String name) {
         this.setName(name);

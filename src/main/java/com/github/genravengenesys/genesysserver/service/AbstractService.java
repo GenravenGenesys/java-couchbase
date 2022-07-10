@@ -23,6 +23,7 @@ public abstract class AbstractService {
     protected final Collection playerCollection;
     protected final Collection nemesisCollection;
     protected final Collection rivalCollection;
+    protected final Collection skillCollection;
 
     @Autowired
     public AbstractService(final Bucket bucket) {
@@ -30,6 +31,7 @@ public abstract class AbstractService {
         this.playerCollection = bucket.scope(ACTOR).collection(PLAYER);
         this.nemesisCollection = bucket.scope(ACTOR).collection(NEMESIS);
         this.rivalCollection = bucket.scope(ACTOR).collection(RIVAL);
+        this.skillCollection = bucket.scope(SKILL).collection(SKILL);
     }
 
     private JsonArray createJsonArray(final String name) {
