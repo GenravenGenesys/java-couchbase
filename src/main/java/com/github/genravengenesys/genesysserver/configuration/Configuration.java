@@ -7,14 +7,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Configuration {
-
-    private final static String connection = "couchbase://localhost";
-    private final static String user = "Administrator";
-    private final static String pass = "password";
     private final static String bucket = "genesys";
 
     @Bean
     public Bucket bucket() {
-        return Cluster.connect(connection, user, pass).bucket(bucket);
+        return Cluster.connect(LocalConfiguration.CONNECTION, LocalConfiguration.USERNAME, LocalConfiguration.PASSWORD).bucket(bucket);
     }
 }
